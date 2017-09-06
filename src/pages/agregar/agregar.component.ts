@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController, NavController } from 'ionic-angular'
 import { Lista, ListaItem } from '../../app/clases/index';
+import { ListaDeseosService } from '../../app/services/lista-deseos.service';
 
 @Component({
     selector: 'app-agregar',
@@ -10,7 +12,11 @@ export class AgregarComponent implements OnInit {
   nombreItem:string= "";
 
   items:ListaItem[]=[];
-  constructor() { }
+  constructor(
+    public alertCtrl:AlertController,
+    public navCtrl:NavController,
+    public _listaDeseos:ListaDeseosService
+  ) { }
 
     ngOnInit() { }
 
@@ -31,6 +37,23 @@ export class AgregarComponent implements OnInit {
     }
 
   AgregarLista(){
+
+      if(this.nombreLista == ""){
+        let alert = this.alertCtrl.create({
+          title: 'Nombre de la lista ',
+          subTitle: 'Por favor ingrese el nombre de la lista antes de gurdar',
+          buttons: ['OK']
+        });
+        alert.present();
+      }else{
+
+      let lista = new Lista (this.nombreLista);
+      lista.items = this.items;
+
+      /*this._listaDeseos.listas.push(lista);*/
+        this._listaDeseos.agregarListas(lista);
+      this.navCtrl.pop();
+      }
 
   }
 }

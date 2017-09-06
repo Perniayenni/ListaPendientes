@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaDeseosService } from  '../../app/services/lista-deseos.service'
 import { AgregarComponent } from '../agregar/agregar.component'
+import { DetallesComponent } from '../detalles/detalles.component'
 
 import { NavController } from 'ionic-angular';
 
@@ -18,4 +19,7 @@ export class PendientesComponent implements OnInit {
       this._navController.push(AgregarComponent);
     }
 
+  verDetalle(lista, idx){
+    this._navController.push(DetallesComponent, {lista, idx});
+  }
 }
