@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Lista } from '../clases/lista'
-import {stringifyElement} from "@angular/platform-browser/testing/src/browser_util";
+import { Lista } from '../clases/lista';
 
 
 @Injectable()
@@ -30,6 +29,11 @@ export class ListaDeseosService {
       this.listas.push(lista);
       this.actualizarData();
     }
+
+  eliminarListas(idx:number){
+   this.listas.splice(idx,1);
+    this.actualizarData();
+  }
 
 
 }
